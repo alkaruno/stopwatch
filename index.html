@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>stopwatch</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script src="jquery-1.8.2.min.js"></script>
+    <script src="raphael-min.js"></script>
+    <script src="store.min.js"></script>
+    <script src="stopwatch.js"></script>
+    <link id="favicon" rel="shortcut icon" type="image/png" href="http://cdn4.iconfinder.com/data/icons/defaulticon/icons/png/16x16/media-play.png">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+<div id="wrapper">
+    <div id="stopwatch-value"></div>
+    <button id="stopwatch-button">Start</button>
+    <button id="stopwatch-reset">Reset</button>
+    <p>SPACE - START/STOP, R - RESET</p>
+</div>
+
+<script>
+
+    jQuery.fn.center = function () {
+        this.css('position', 'absolute');
+        this.css('top', Math.max(0, (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop()) + 'px');
+        this.css('left', Math.max(0, (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft()) + 'px');
+        return this;
+    };
+
+    $(function() {
+        $(window).on('resize', function() {
+            $('#wrapper').center();
+        });
+        $('#wrapper').center();
+    });
+
+</script>
+
+</body>
+</html>
