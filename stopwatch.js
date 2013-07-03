@@ -2,43 +2,9 @@ var Stopwatch = (function () {
 
     var summa = 0;
     var started = null;
-    var rects = [];
     var currentStr = null;
 
-    var raphael = null;
-
-    var options = {
-        digits: 5,
-        size: 15,
-        space: 1,
-        color: '#fc3',
-        bgcolor: '#222',
-        animationSpeed: 200
-    };
-
-    var font = [
-        '00000     0 00000 00000 0   0 00000 00000 00000 00000 00000            ',
-        '0   0     0     0     0 0   0 0     0         0 0   0 0   0   0        ',
-        '0   0     0     0     0 0   0 0     0         0 0   0 0   0            ',
-        '0   0     0 00000 00000 00000 00000 00000     0 00000 00000            ',
-        '0   0     0 0         0     0     0 0   0     0 0   0     0            ',
-        '0   0     0 0         0     0     0 0   0     0 0   0     0   0        ',
-        '00000     0 00000 00000     0 00000 00000     0 00000 00000            '
-    ];
-
     var Stopwatch = function () {
-
-        initDigits(options.digits);
-
-        for (i = 0; i < options.digits * 6; i++) {
-            rects[i] = [];
-            for (var y = 0; y < 7; y++) {
-                rects[i][y] = raphael.rect(i * (options.size + options.space), y * (options.size + options.space), options.size, options.size).attr({
-                    'fill': options.bgcolor,
-                    'stroke': null
-                });
-            }
-        }
 
         if (store.enabled) {
             summa = store.get('summa') || 0;
@@ -115,61 +81,19 @@ var Stopwatch = (function () {
         var str = (hour > 0 ? hour + ':' : '') + (mins < 10 ? '0' : '') + mins + (on ? ':' : ' ') + (secs < 10 ? '0' : '') + secs;
 
         if (str != currentStr) {
-            updateRects(str);
+            var html = '';
+            for (var i = 0, len = str.length; i < len; i++) {
+                var char = str.charAt(i);
+                if (char == ':' || char == ' ') {
+                    html += '<span class="colon">' + char + '</span>'
+                } else {
+                    html += '<span>' + char + '</span>'
+                }
+            }
+            $('#stopwatch-value').html(html);
             document.title = str;
             currentStr = str;
         }
-    };
-
-    var initDigits = function (digits) {
-
-        var w = digits * 6 * (options.size + options.space) - (options.size + 2 * options.space);
-        var h = 7 * (options.size + options.space) - options.space;
-
-        if (raphael == null) {
-            raphael = Raphael('stopwatch-value', w, h);
-        } else {
-            raphael.setSize(w, h);
-        }
-
-        for (i = 0; i < options.digits * 6; i++) {
-            rects[i] = [];
-            for (var y = 0; y < 7; y++) {
-                rects[i][y] = raphael.rect(i * (options.size + options.space), y * (options.size + options.space), options.size, options.size).attr({
-                    'fill': options.bgcolor,
-                    'stroke': null
-                });
-            }
-        }
-
-        $('#wrapper').center();
-    };
-
-    var updateRects = function (str) {
-
-        if (str.length > options.digits) {
-            options.digits = str.length;
-            initDigits(options.digits);
-        }
-
-        var symbol;
-        for (var l = 0; l < str.length; l++) {
-            str.charAt(l) == ':' ? symbol = 10 : (str.charAt(l) == ' ' ? symbol = 11 : symbol = str.charAt(l));
-            for (var x = 0; x < 6; x++) {
-                for (var y = 0; y < 7; y++) {
-                    if (font[y].charAt(symbol * 6 + x) == '0' && rects[l * 6 + x][y].attrs.fill == options.bgcolor) {
-                        rects[l * 6 + x][y].animate({
-                            'fill': options.color
-                        }, options.animationSpeed);
-                    } else if (font[y].charAt(symbol * 6 + x) == ' ' && rects[l * 6 + x][y].attrs.fill == options.color) {
-                        rects[l * 6 + x][y].animate({
-                            'fill': options.bgcolor
-                        }, options.animationSpeed);
-                    }
-                }
-            }
-        }
-
     };
 
     Stopwatch.prototype = {
