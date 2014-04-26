@@ -1,20 +1,23 @@
-@import url(http://fonts.googleapis.com/css?family=Kreon:400,700);
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(http://fonts.googleapis.com/css?family=Kreon:700);
 
 body, input, select, button {
     background-color: #fff;
     color: #000;
-    font-family: "Kreon", sans-serif;
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
 }
 
 #stopwatch-value {
-    font-size: 256px;
+    font-size: 265px;
 }
 
 #stopwatch-value span {
+	font-family: "Kreon";
 	display: inline-block;
-	width: 145px;
-    min-width: 145px;
-    max-width: 145px;
+	width: 150px;
+    min-width: 150px;
+    max-width: 150px;
 	text-align: center;
 	font-weight: bold;
 }
@@ -26,19 +29,13 @@ body, input, select, button {
 }
 
 button {
-	font-size: 18px;
-    padding: 5px 10px;
-    min-width: 100px;
-}
-
-button {
 	background-color: #3498DB;
 	color: #fff;
 	padding: 8px 20px 6px;
 	border: none;
 	border-radius: 4px;
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 16px;
 	border-bottom: 2px solid #2980B9;
 	cursor: pointer;
 }
