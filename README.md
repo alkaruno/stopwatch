@@ -1,6 +1,6 @@
 Stopwatch
 =========
 
-Very useful for timetracking.
+Simple and beauty stopwatch. Very useful for timetracking.
 
-Demo: [http://xplosio.com/stopwatch/](http://xplosio.com/stopwatch/)
+Demo: [http://alkaruno.github.io/stopwatch/](http://alkaruno.github.io/stopwatch/)
